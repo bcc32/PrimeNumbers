@@ -9,7 +9,7 @@ namespace PrimeNumbers
 {
     public class Primes : IEnumerable<Number>
     {
-        private static Number REASONABLE_LIMIT = new Number(1000000);
+        private static Number REASONABLE_LIMIT = new Number(10000000);
         private static List<Number> _cache = new List<Number>() { 2, 3 };
 
         // caches at least all of the primes <= limit
@@ -18,6 +18,8 @@ namespace PrimeNumbers
             while (AddOneMore(limit)) // loops until candidate > limit
                 ;
         }
+
+        // TODO make enumerator keep generating primes
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -56,6 +58,12 @@ namespace PrimeNumbers
                         return false;
                 return true;
             }
+        }
+
+        public static IEnumerable<Number> Upto(Number limit)
+        {
+            Cache(limit);
+            return new Primes().TakeWhile(a => a <= limit);
         }
 
         private static bool AddOneMore(Number limit)

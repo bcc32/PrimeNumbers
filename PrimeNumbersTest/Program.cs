@@ -12,8 +12,7 @@ namespace PrimeNumbersTest
         static void Main(string[] args)
         {
             Number total = 0;
-            Primes.Cache(2000000);
-            foreach (var num in new Primes())
+            foreach (var num in Primes.Upto(2000000))
             {
                 total += num;
             }
